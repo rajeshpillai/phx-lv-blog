@@ -16,7 +16,8 @@ defmodule LvDemo.Blogs.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :slug, :desc, :is_published])
+    |> cast(attrs, [:title, :slug, :desc, :is_published, :blog_id, :body])
     |> validate_required([:title, :slug, :desc, :is_published])
   end
 end
+
