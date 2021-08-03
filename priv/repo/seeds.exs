@@ -18,10 +18,10 @@ Repo.delete_all(Post)
 Repo.delete_all(Blog)
 
 LvDemo.Repo.insert!(%Blog{
-  name: "Rajesh's Blog",
-  slug: "rajeshpillai",
-  desc: "A personal blog",
-  url: "/rajeshpillai",
+  name: "Elixir Blog",
+  slug: "elixr",
+  desc: "An Elixir blog",
+  url: "/elixir",
   is_published: true,
   posts: [
     %Post{title: "Hello World", slug: "hello-world", desc: "Welcome post", is_published: true,
@@ -31,12 +31,4 @@ LvDemo.Repo.insert!(%Blog{
     %Post{title: "My Learning", slug: "learning", desc: "Today I learnt...", is_published: true,
       body: "Post goes here...."},
   ]
-})
-
-LvDemo.Repo.insert!(%Blog{
-  name: "Elixir Blog",
-  slug: "elixir",
-  desc: "An Elixir Story",
-  url: "/elixir",
-  is_published: true
 })
