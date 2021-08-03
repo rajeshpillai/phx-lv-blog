@@ -8,6 +8,7 @@ defmodule LvDemo.Blogs do
 
   alias LvDemo.Blogs.Blog
   alias LvDemo.Blogs.Post
+  alias LvDemo.Blogs.Tag
 
   @doc """
   Returns the list of blogs.
@@ -36,7 +37,18 @@ defmodule LvDemo.Blogs do
       ** (Ecto.NoResultsError)
 
   """
-  def get_blog!(id), do: Repo.get!(Blog, id) |> Repo.preload(:posts)
+
+  # Preload Blog with posts and it's tags
+  def get_blog!(id) do
+    # addr =
+    #   Address
+    #   |> Repo.get(123)
+    #   |> Repo.preload(street: [city: [region: :country]])
+
+    # IO.inspect(addr.street.city.region.country)
+
+    Repo.get!(Blog, id) |> Repo.preload(posts: [:tags])
+  end
 
   @doc """
   Creates a blog.
@@ -115,7 +127,7 @@ defmodule LvDemo.Blogs do
 
   """
   def list_posts do
-    Repo.all(Post)
+    Repo.all(Post) |> Repo.preload(:tags)
   end
 
   @doc """
@@ -132,8 +144,10 @@ defmodule LvDemo.Blogs do
       ** (Ecto.NoResultsError)
 
   """
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload(:tags)
 
+  @spec create_post(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}) ::
+          any
   @doc """
   Creates a post.
 

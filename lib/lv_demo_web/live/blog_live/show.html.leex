@@ -59,5 +59,11 @@
   <div>
     <h2><%= post.title %></h2>
     <article><%= post.desc %></article>
+
+    <div>
+      <%= for tag <- post.tags do %>
+        <span class="tag"><%= tag.title %></span>
+      <% end %>
+      </div>
   </div>
 <% end %>
