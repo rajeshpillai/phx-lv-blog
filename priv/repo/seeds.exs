@@ -13,11 +13,18 @@
 alias LvDemo.Repo
 alias LvDemo.Blogs.Blog
 alias LvDemo.Blogs.Post
+alias LvDemo.Blogs.Tag
 
+Repo.delete_all(Tag)
 Repo.delete_all(Post)
 Repo.delete_all(Blog)
 
-LvDemo.Repo.insert!(%Blog{
+
+{:ok, elixir} = Repo.insert(%Tag{title: "Elixir"})
+{:ok, phoenix} =Repo.insert(%Tag{title: "Phoenix"})
+
+
+Repo.insert!(%Blog{
   name: "Elixir Blog",
   slug: "elixr",
   desc: "An Elixir blog",
@@ -25,7 +32,8 @@ LvDemo.Repo.insert!(%Blog{
   is_published: true,
   posts: [
     %Post{title: "Hello World", slug: "hello-world", desc: "Welcome post", is_published: true,
-      body: "Post goes here...."
+      body: "Post goes here....",
+      tags: [elixir, phoenix]
 
     },
     %Post{title: "My Learning", slug: "learning", desc: "Today I learnt...", is_published: true,
