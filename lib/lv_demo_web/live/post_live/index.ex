@@ -3,6 +3,7 @@ defmodule LvDemoWeb.PostLive.Index do
 
   alias LvDemo.Blogs
   alias LvDemo.Blogs.Post
+  alias LvDemo.Blogs.Blog
 
   @impl true
   def mount(_params, _session, socket) do
@@ -20,11 +21,18 @@ defmodule LvDemoWeb.PostLive.Index do
     |> assign(:post, Blogs.get_post!(id))
   end
 
-  defp apply_action(socket, :new, _params) do
+
+  defp apply_action(socket, :new, %{"params" => id}) do
     socket
-    |> assign(:page_title, "New Post")
+    |> assign(:page_title, "New Post for blog " <> id)
     |> assign(:post, %Post{})
   end
+
+  # defp apply_action(socket, :new, _params) do
+  #   socket
+  #   |> assign(:page_title, "New Post")
+  #   |> assign(:post, %Post{})
+  # end
 
   defp apply_action(socket, :index, _params) do
     socket

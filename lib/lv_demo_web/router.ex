@@ -17,13 +17,18 @@ defmodule LvDemoWeb.Router do
   scope "/", LvDemoWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    # live "/", PageLive, :index
+
+    live "/", BlogLive.Index, :index
 
     live "/blogs", BlogLive.Index, :index
     live "/blogs/new", BlogLive.Index, :new
     live "/blogs/:id/edit", BlogLive.Index, :edit
     live "/blogs/:id", BlogLive.Show, :show
     live "/blogs/:id/show/edit", BlogLive.Show, :edit
+
+    # live "/posts/:id/new", PostLive.Index, :edit
+
 
     live "/posts", PostLive.Index, :index
     live "/posts/new", PostLive.Index, :new
