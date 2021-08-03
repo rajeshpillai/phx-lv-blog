@@ -1,10 +1,21 @@
 <h1>Show Blog</h1>
 
-<span><%= live_patch "New Post", to: Routes.post_index_path(@socket, :new, blog_id: @blog.id) %></span>
+<span><%= live_patch "New Postx", to: Routes.blog_show_path(@socket, :new_post, @blog) %></span>
 
+<span><%= live_patch "New Post", to: Routes.post_index_path(@socket, :new, blog_id: @blog.id) %></span>
 <span><%= live_patch "Edit", to: Routes.blog_show_path(@socket, :edit, @blog), class: "button" %></span>
 <span><%= live_redirect "Back", to: Routes.blog_index_path(@socket, :index) %></span>
 
+
+
+<%= if @live_action in [:new_post] do %>
+  <%= live_modal @socket, LvDemoWeb.PostLive.FormComponent,
+    id: @post.id || :new,
+    title: @page_title,
+    action: @live_action,
+    post: @post,
+    return_to: Routes.blog_show_path(@socket, :show, @blog) %>
+<% end %>
 
 <%= if @live_action in [:edit] do %>
   <%= live_modal @socket, LvDemoWeb.BlogLive.FormComponent,

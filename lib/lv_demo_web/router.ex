@@ -27,7 +27,7 @@ defmodule LvDemoWeb.Router do
     live "/blogs/:id", BlogLive.Show, :show
     live "/blogs/:id/show/edit", BlogLive.Show, :edit
 
-    # live "/posts/:id/new", PostLive.Index, :edit
+    live "/blogs/:id/new", BlogLive.Show, :new_post
 
 
     live "/posts", PostLive.Index, :index
