@@ -24,8 +24,12 @@ LvDemo.Repo.insert!(%Blog{
   url: "/rajeshpillai",
   is_published: true,
   posts: [
-    %Post{title: "Hello World", slug: "hello-world", desc: "Welcome post", is_published: true},
-    %Post{title: "My Learning", slug: "learning", desc: "Today I learnt...", is_published: true},
+    %Post{title: "Hello World", slug: "hello-world", desc: "Welcome post", is_published: true,
+      body: "Post goes here...."
+
+    },
+    %Post{title: "My Learning", slug: "learning", desc: "Today I learnt...", is_published: true,
+      body: "Post goes here...."},
   ]
 })
 

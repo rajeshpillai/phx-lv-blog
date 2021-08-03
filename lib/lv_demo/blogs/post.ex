@@ -7,6 +7,7 @@ defmodule LvDemo.Blogs.Post do
     field :is_published, :boolean, default: false
     field :slug, :string
     field :title, :string
+    field :body, :string
     # field :blog_id, :id
     belongs_to :blog, LvDemo.Blogs.Blog
     timestamps()

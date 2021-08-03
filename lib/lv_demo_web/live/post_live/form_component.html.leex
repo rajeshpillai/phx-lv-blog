@@ -15,8 +15,12 @@
   <%= error_tag f, :slug %>
 
   <%= label f, :desc %>
-  <%= textarea f, :desc %>
+  <%= text_input f, :desc %>
   <%= error_tag f, :desc %>
+
+    <%= label f, :body %>
+  <%= textarea f, :body %>
+  <%= error_tag f, :body %>
 
   <%= label f, :is_published %>
   <%= checkbox f, :is_published %>

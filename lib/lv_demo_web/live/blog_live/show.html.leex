@@ -38,5 +38,12 @@
 
 </ul>
 
+<%= for post <- @blog.posts do %>
+  <div>
+    <h2><%= post.title %></h2>
+    <article><%= post.desc %></article>
+  </div>
+<% end %>
+
 <span><%= live_patch "Edit", to: Routes.blog_show_path(@socket, :edit, @blog), class: "button" %></span>
 <span><%= live_redirect "Back", to: Routes.blog_index_path(@socket, :index) %></span>

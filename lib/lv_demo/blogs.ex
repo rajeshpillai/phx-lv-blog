@@ -36,7 +36,7 @@ defmodule LvDemo.Blogs do
       ** (Ecto.NoResultsError)
 
   """
-  def get_blog!(id), do: Repo.get!(Blog, id)
+  def get_blog!(id), do: Repo.get!(Blog, id) |> Repo.preload(:posts)
 
   @doc """
   Creates a blog.
