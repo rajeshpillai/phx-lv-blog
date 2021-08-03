@@ -22,6 +22,7 @@ defmodule LvDemoWeb.PostLive.Index do
   end
 
 
+  # New post for blog_id
   defp apply_action(socket, :new, %{"blog_id" => id}) do
     socket
     |> assign(:page_title, "New Post for blog " <> id)
