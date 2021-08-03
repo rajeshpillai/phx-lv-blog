@@ -1,6 +1,6 @@
 <h1>Show Blog</h1>
 
-<span><%= live_patch "New Post", to: Routes.post_index_path(@socket, :new, params: @blog.id) %></span>
+<span><%= live_patch "New Post", to: Routes.post_index_path(@socket, :new, blog_id: @blog.id) %></span>
 
 <span><%= live_patch "Edit", to: Routes.blog_show_path(@socket, :edit, @blog), class: "button" %></span>
 <span><%= live_redirect "Back", to: Routes.blog_index_path(@socket, :index) %></span>

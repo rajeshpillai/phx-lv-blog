@@ -22,10 +22,10 @@ defmodule LvDemoWeb.PostLive.Index do
   end
 
 
-  defp apply_action(socket, :new, %{"params" => id}) do
+  defp apply_action(socket, :new, %{"blog_id" => id}) do
     socket
     |> assign(:page_title, "New Post for blog " <> id)
-    |> assign(:post, %Post{})
+    |> assign(:post, %Post{blog_id: id})
   end
 
   # defp apply_action(socket, :new, _params) do
