@@ -1,3 +1,5 @@
+# https://minhajuddin.com/2020/05/03/many-to-many-relationships-in-ecto-and-phoenix-for-products-and-tags/
+
 defmodule LvDemoWeb.BlogLive.Show do
   use LvDemoWeb, :live_view
 
@@ -17,7 +19,7 @@ defmodule LvDemoWeb.BlogLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:post, %Post{blog_id: id})
+     |> assign(:post, %Post{blog_id: id, tags: []})
      |> assign(:blog, Blogs.get_blog!(id))}
   end
 

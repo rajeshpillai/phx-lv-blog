@@ -22,9 +22,13 @@
   <%= text_input f, :desc %>
   <%= error_tag f, :desc %>
 
-    <%= label f, :body %>
+  <%= label f, :body %>
   <%= textarea f, :body %>
   <%= error_tag f, :body %>
+
+  <%= label f, :tags %>
+  <%= text_input f, :tags %>
+
 
   <%= label f, :is_published %>
   <%= checkbox f, :is_published %>
