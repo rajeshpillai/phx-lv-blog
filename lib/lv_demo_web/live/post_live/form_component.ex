@@ -24,6 +24,9 @@ defmodule LvDemoWeb.PostLive.FormComponent do
   end
 
   def handle_event("save", %{"post" => post_params}, socket) do
+    IO.puts "++++++"
+    IO.inspect post_params
+    IO.inspect socket.assigns.action
     save_post(socket, socket.assigns.action, post_params)
   end
 
@@ -40,7 +43,7 @@ defmodule LvDemoWeb.PostLive.FormComponent do
     end
   end
 
-  defp save_post(socket, :new, post_params) do
+  defp save_post(socket, :new_post, post_params) do
     case Blogs.create_post(post_params) do
       {:ok, _post} ->
         {:noreply,

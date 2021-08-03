@@ -161,9 +161,37 @@ defmodule LvDemo.Blogs do
 
   """
   def create_post(attrs \\ %{}) do
+    IO.puts("+++CREATE_POST++++")
+
     %Post{}
     |> Post.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:tags, post_tags(attrs))
     |> Repo.insert()
+  end
+
+
+defp parse_tags(nil), do: []
+
+defp parse_tags(tags) do
+  # Repo.insert_all requires the inserted_at and updated_at to be filled out
+  # and they should have time truncated to the second that is why we need this
+  now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
+
+  for tag <- String.split(tags, ","),
+      tag = tag |> String.trim() |> String.downcase(),
+      tag != "",
+      do: %{title: tag, inserted_at: now, updated_at: now}
+end
+
+  defp post_tags(attrs) do
+    tags = parse_tags(attrs["tags"]) # => [%{name: "phone", inserted_at: ..},  ...]
+
+    # do an upsert ensuring that all the input tags are present
+    Repo.insert_all(Tag, tags, on_conflict: :nothing)
+
+    tag_names = for t <- tags, do: t.title
+    # find all the input tags
+    Repo.all(from t in Tag, where: t.title in ^tag_names)
   end
 
   @doc """
