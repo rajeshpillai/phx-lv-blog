@@ -10,7 +10,7 @@ defmodule LvDemo.Blogs.Post do
     field :body, :string
     # field :blog_id, :id
     belongs_to :blog, LvDemo.Blogs.Blog
-    many_to_many :tags, LvDemo.Blogs.Tag, join_through: "posts_tags"
+    many_to_many :tags, LvDemo.Blogs.Tag, join_through: "posts_tags", on_replace: :delete
     timestamps()
   end
 

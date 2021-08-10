@@ -206,9 +206,13 @@ end
       {:error, %Ecto.Changeset{}}
 
   """
+  
   def update_post(%Post{} = post, attrs) do
+    IO.puts("+++UPDATE POST++++")
+    IO.inspect attrs
     post
     |> Post.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:tags, post_tags(attrs))
     |> Repo.update()
   end
 

@@ -13,14 +13,25 @@ defmodule LvDemoWeb.PostLive.FormComponent do
      |> assign(:changeset, changeset)}
   end
 
+  # If tags change, do nothing (form input)
+  # https://elixirforum.com/t/phx-change-on-input-themselves/34230/2
+  def handle_event("validate", %{"_target" => ["post", "tags"], "post" => %{"tags" => tags}}, socket) do
+    IO.puts "Form Validate: Tags change"
+    
+    {:noreply, socket}
+  end
+
   @impl true
   def handle_event("validate", %{"post" => post_params}, socket) do
+    IO.puts "Form Validate: "
+    IO.inspect post_params
     changeset =
       socket.assigns.post
       |> Blogs.change_post(post_params)
       |> Map.put(:action, :validate)
 
-    {:noreply, assign(socket, :changeset, changeset)}
+    # {:noreply, assign(socket, :changeset, changeset)}
+    {:noreply, socket}
   end
 
   def handle_event("save", %{"post" => post_params}, socket) do
@@ -30,7 +41,11 @@ defmodule LvDemoWeb.PostLive.FormComponent do
     save_post(socket, socket.assigns.action, post_params)
   end
 
-  defp save_post(socket, :edit, post_params) do
+  defp save_post(socket, :edit_post, post_params) do
+    
+    IO.puts "+++++Updating post: "
+    IO.inspect socket.assigns.post
+
     case Blogs.update_post(socket.assigns.post, post_params) do
       {:ok, _post} ->
         {:noreply,

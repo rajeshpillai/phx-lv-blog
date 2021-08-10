@@ -37,6 +37,7 @@ defmodule LvDemoWeb do
       import Phoenix.Controller,
         only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
 
+      
       # Include shared imports and aliases for views
       unquote(view_helpers())
     end
@@ -91,6 +92,10 @@ defmodule LvDemoWeb do
       import LvDemoWeb.ErrorHelpers
       import LvDemoWeb.Gettext
       alias LvDemoWeb.Router.Helpers, as: Routes
+
+      # custom view helpers
+      import LvDemoWeb.PostView
+
     end
   end
 
