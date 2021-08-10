@@ -1,0 +1,18 @@
+<h1>Listing Tags</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="blogs">
+    <%= for tag <- @tags do %>
+      <tr id="tag-<%= tag.id %>">
+        <td><%= tag.title %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

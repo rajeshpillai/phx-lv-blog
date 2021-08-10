@@ -7,6 +7,6 @@ defmodule LvDemo.Repo.Migrations.CreateTags do
 
       timestamps()
     end
-
+    create unique_index(:tags, [:title])
   end
 end
