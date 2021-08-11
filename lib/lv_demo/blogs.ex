@@ -374,6 +374,9 @@ end
   """
   def get_comment!(id), do: Repo.get!(Comment, id)
 
+  def get_comments_by_post(post_id), do: Repo.all(Comment, [post_id: post_id])
+
+
   @doc """
   Creates a comment.
 

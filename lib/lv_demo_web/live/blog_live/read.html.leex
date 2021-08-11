@@ -34,7 +34,7 @@
 
 <div>
   <h4>All conversations</h4>
-  <%= for comment <- @post.comments do %>
+  <%= for comment <- @comments do %>
     <div>
       <%= comment.body  %>
       <h4>by <%= comment.email %> </h4>

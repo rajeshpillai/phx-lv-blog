@@ -18,6 +18,12 @@ defmodule LvDemoWeb.BlogLive.Read do
     IO.puts "+++READ POST-----"
     IO.inspect params
     post = Blogs.get_post_with_comments!(post_id)
+
+    comments = Blogs.get_comments_by_post(post_id)
+
+    IO.puts "COMMENTS: "
+    IO.inspect( comments)
+
     IO.inspect post
     changeset = Blogs.change_comment(%Comment{})
 
@@ -26,6 +32,7 @@ defmodule LvDemoWeb.BlogLive.Read do
      |> assign(:changeset, changeset)
      |> assign(:page_title, page_title(socket.assigns.live_action))
      |> assign(:post, post)
+     |> assign(:comments, comments)
      |> assign(:blog, Blogs.get_blog!(id))}
   end
 
@@ -38,9 +45,12 @@ defmodule LvDemoWeb.BlogLive.Read do
     # post = Blogs.get_post!(socket.assigns.post.id)
 
     case Blogs.create_comment(comment_params) do
-      {:ok, _comment} ->
+
+      {:ok, comment} ->
+        comments = assign(:comments, [comment | socket.assigns.comments])
         {:noreply,
          socket
+         |> assign(:comments, comments)
          |> put_flash(:info, "Comment created successfully")
         }
 
