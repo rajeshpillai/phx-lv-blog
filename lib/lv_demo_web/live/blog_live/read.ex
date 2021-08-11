@@ -42,7 +42,7 @@ defmodule LvDemoWeb.BlogLive.Read do
         {:noreply,
          socket
          |> put_flash(:info, "Comment created successfully")
-         |> push_redirect(to: socket.assigns.return_to)}
+        }
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
