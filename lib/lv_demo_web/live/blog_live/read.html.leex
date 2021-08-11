@@ -1,0 +1,14 @@
+<h1>Read Post</h1>
+
+<span><%= live_redirect "back", to: Routes.blog_show_path(@socket, :show, @blog) %></span>
+
+<div>
+  <h2><%= @post.title %></h2>
+  <article><%= @post.desc %></article>
+
+  <div>
+    <%= for tag <- @post.tags do %>
+      <span class="tag"><%= tag.title %></span>
+    <% end %>
+    </div>
+</div>

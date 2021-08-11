@@ -75,6 +75,7 @@
       <% end %>
       </div>
   </div>
+  <span><%= live_patch "Read", to: Routes.blog_read_path(@socket, :read_post, @blog, post) %></span> |
   <span><%= live_patch "Edit", to: Routes.blog_show_path(@socket, :edit_post, @blog, post) %></span>
-  
+
 <% end %>
