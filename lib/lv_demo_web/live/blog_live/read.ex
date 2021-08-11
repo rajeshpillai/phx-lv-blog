@@ -5,6 +5,7 @@ defmodule LvDemoWeb.BlogLive.Read do
 
   alias LvDemo.Blogs
   alias LvDemo.Blogs.Post
+  alias LvDemo.Blogs.Comment
 
   @impl true
   def mount(_params, _session, socket) do
@@ -12,16 +13,40 @@ defmodule LvDemoWeb.BlogLive.Read do
   end
 
   # Post Edit
+  @impl true
   def handle_params(%{"post_id" => post_id, "id" => id} = params, _, socket) do
     IO.puts "+++READ POST-----"
     IO.inspect params
-    post = Blogs.get_post!(post_id)
+    post = Blogs.get_post_with_comments!(post_id)
     IO.inspect post
+    changeset = Blogs.change_comment(%Comment{})
+
     {:noreply,
      socket
+     |> assign(:changeset, changeset)
      |> assign(:page_title, page_title(socket.assigns.live_action))
      |> assign(:post, post)
      |> assign(:blog, Blogs.get_blog!(id))}
+  end
+
+  @impl true
+  def handle_event("save_comment", %{"comment" => comment_params}, socket) do
+    IO.puts "++++SAVE COMMENT-----"
+    IO.inspect comment_params
+    IO.inspect socket.assigns
+
+    # post = Blogs.get_post!(socket.assigns.post.id)
+
+    case Blogs.create_comment(comment_params) do
+      {:ok, _comment} ->
+        {:noreply,
+         socket
+         |> put_flash(:info, "Comment created successfully")
+         |> push_redirect(to: socket.assigns.return_to)}
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        {:noreply, assign(socket, changeset: changeset)}
+    end
   end
 
 

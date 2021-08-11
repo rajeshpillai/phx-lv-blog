@@ -4,7 +4,7 @@ defmodule LvDemo.Blogs.Comment do
 
   schema "comments" do
     field :email, :string
-    field :title, :string
+    field :body, :string
     belongs_to :post, LvDemo.Blogs.Post
 
     timestamps()
@@ -13,7 +13,7 @@ defmodule LvDemo.Blogs.Comment do
   @doc false
   def changeset(comment, attrs) do
     comment
-    |> cast(attrs, [:title, :email])
-    |> validate_required([:title, :email])
+    |> cast(attrs, [:body, :email, :post_id])
+    |> validate_required([:body, :email, :post_id])
   end
 end

@@ -146,6 +146,8 @@ defmodule LvDemo.Blogs do
   """
   def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload(:tags)
 
+  def get_post_with_comments!(id), do: Repo.get!(Post, id) |> Repo.preload(:tags) |> Repo.preload(:comments)
+
   @spec create_post(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}) ::
           any
   @doc """
@@ -206,7 +208,7 @@ end
       {:error, %Ecto.Changeset{}}
 
   """
-  
+
   def update_post(%Post{} = post, attrs) do
     IO.puts("+++UPDATE POST++++")
     IO.inspect attrs
@@ -385,6 +387,7 @@ end
 
   """
   def create_comment(attrs \\ %{}) do
+    # comment_changeset = Ecto.build_assoc(post, :comments, body: attrs["body"], email: attrs["email"])
     %Comment{}
     |> Comment.changeset(attrs)
     |> Repo.insert()

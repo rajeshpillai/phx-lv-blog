@@ -3,7 +3,7 @@ defmodule LvDemo.Repo.Migrations.CreateComments do
 
   def change do
     create table(:comments) do
-      add :title, :string
+      add :body, :text
       add :email, :string
       add :post_id, references(:posts, on_delete: :nothing)
 

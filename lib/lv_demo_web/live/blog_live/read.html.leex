@@ -12,3 +12,32 @@
     <% end %>
     </div>
 </div>
+
+<div>
+  <h2>Comments </h2>
+  <%= f = form_for @changeset, "#",
+    id: "comment-form",
+    phx_submit: "save_comment" %>
+    <%= hidden_input f, :post_id, value: @post.id %>
+
+    <%= label f, :email %>
+    <%= text_input f, :email %>
+    <%= error_tag f, :email %>
+
+    <%= label f, :body %>
+    <%= textarea f, :body %>
+    <%= error_tag f, :body %>
+
+    <%= submit "Save", phx_disable_with: "Saving..." %>
+  </form>
+</div>
+
+<div>
+  <h4>All conversations</h4>
+  <%= for comment <- @post.comments do %>
+    <div>
+      <%= comment.body  %>
+      <h4>by <%= comment.email %> </h4>
+    </div>
+  <% end  %>
+</div>
